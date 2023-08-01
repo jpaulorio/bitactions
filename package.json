@@ -1,7 +1,7 @@
 {
   "name": "bitactions",
   "version": "1.0.0",
-  "description": "A plugin for BitBar that displays Github Actions status in your Mac OS X Menu Bar",
+  "description": "A plugin for XBar that displays Github Actions status in your Mac OS X Menu Bar",
   "keywords": [
     "Github Actions",
     "GitHub CI/CD",

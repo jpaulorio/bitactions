@@ -14,7 +14,7 @@ if [ -d "bitactions" ]; then
 # If not installed, clone the repository
 else
 	echo "Downloading bitactions..."
-	git clone https://github.com/paulononaka/bitactions --quiet
+	git clone https://github.com/jpaulorio/bitactions --quiet
 	echo "Downloaded successfully."
 	cd bitactions
 fi
