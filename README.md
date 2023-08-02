@@ -1,4 +1,4 @@
-# GitHub Build Monitor - Github Actions status for a specific Github repository on macOS menu bar
+# GitHub Build Monitor - Github Actions status for multiple repositories under a Github organization on macOS menu bar
 
 This is a fork from [this repo](https://github.com/paulononaka/bitactions/) that adds support to multiple repositories under a given organization.
 It also introduces new configurations for filtering both repositories and workflows by name.
