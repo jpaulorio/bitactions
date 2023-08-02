@@ -1,11 +1,13 @@
-# BitActions - Github Actions status for a specific Github repository on macOS menu bar
+# GitHub Build Monitor - Github Actions status for a specific Github repository on macOS menu bar
 
 This is a fork from [this repo](https://github.com/paulononaka/bitactions/) that adds support to multiple repositories under a given organization.
 It also introduces new configurations for filtering both repositories and workflows by name.
+It removes support for monitoring the workflows of the current branch of a given local repo.
+It only works for repositories under a Github org.
 
 ## Example
 
-![BitActions example showing GitHub Actions status on macOS menu](images/sample.png)
+![Github Build Monitor example showing GitHub Actions status on macOS menu](images/sample.png)
 
 ## Prerequisites
 
@@ -27,46 +29,45 @@ Create a `.bitactionsrc` file in your $HOME with the following content:
 ```json
 {
     "githubToken": "<Your personal classic Git hub token. Ex: aaa_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx>",
-    "githubRepoName": "<You can get it from the end of the GithHub URL of the project you want to watch. Ex: acme_corporation/my_project>",
-    "localRepoPath": "<Full path of your repo in your local machine. This will serve to automatically watch the branch you are. Ex: /Users/paulononaka/codes/my_project>",
-    "watchBranchName": "<Branch name to watch when local branch does not have any runs on GitHub. Ex: main>",
-    "statusMode": "<branch OR summary OR rotate. Ex: branch>"
+    "repoNames": "<You can get it from the end of the GithHub URL of the project you want to watch. Ex: [repo-one\", \"repo-two\"]>",
+    "statusMode": "summary",
+    "orgName": "<Name of your Github Org>",
+    "ignoredRepos": "<An array of (partial) repo names to igore. Case insenstive. [\"not-mine\", \"not-this-either\"]>",
+    "ignoredWorkflows": "<An array of (partial) workload names to igore. Case insenstive. [\"example\", \"deploy\", \"quality\"]>"
 }
 ```
 
 After the configuration, click on xbar your on Mac OS bar and refresh it. Wait a few seconds for the first Github request and voalá. The plugin should starts working.
 
 ## githubToken
-// **Optional** for public repos, required for privated ones - Your personal classic Git hub token. A forty-digit alphanumeric string.
+// **Optional** Your personal classic Git hub token. A forty-digit alphanumeric string.
 
 TLTR: Follow these steps at [docs.github.com](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic) to create a personal token (classic).
 
-BitActions uses [Github Actions API](https://docs.github.com/en/rest/reference/actions). It is possible to use these APIs without any authentication for public repositories. However, for unauthenticated requests, the rate limit allows for up to 60 requests per hour (Details at [docs.github.com](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting)). Authenticated requests have higher limits, up to 5000 requests per hour.
+Github Build Monitor uses [Github Actions API](https://docs.github.com/en/rest/reference/actions). It is possible to use these APIs without any authentication for public repositories. However, for unauthenticated requests, the rate limit allows for up to 60 requests per hour (Details at [docs.github.com](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting)). Authenticated requests have higher limits, up to 5000 requests per hour.
 
 The token does not need to have any specific scope for public repositories. However, the token  needs to have `repo - Full control of private repositories` scope for private repositories.
 
-## githubRepoName
-// **Required** - Github repo name. Ex: acme_corporation/my_project
+## repoNames
+// **Required** - List of Github repo names. Ex: ["my_project", "another-project"]
 
 You can get it from the end of the GithHub URL of the project you want to watch.
-Ex: `https://github.com/acme_corporation/my_project` becomes `acme_corporation/my_project`.
+Ex: `https://github.com/acme_corporation/my_project` becomes `my_project`.
 
-## localRepoPath
-// **optional** - Ex: /Users/paulononaka/codes/my_project
+## orgName
+// **Required** - Name of your Github org. Ex: "acme_corporation"
 
-Say you have a workflow that triggers `on: pull_request`. GitHub Actions keeps one workflow for all pushed branches so the last run might not be the branch that you are working on locally, the one you really want to monitor.
+You can get it from the first path segment of the GithHub URL of the project you want to watch.
+Ex: `https://github.com/acme_corporation/my_project` becomes `acme_corporation`.
 
-Given that, set this option if you wish to watch specifics branches you are working on locally. If you set it, a submenu with the workflow will monitor this branch. If you wish the status also appears in the main Mac OS menu bar, set `statusMode` to `branch`.
+## ignoredRepos
+// **optional** - List of partial repository names you don't want to watch. Case insenstive. Ex: ["test", "debug"]
 
-Please notice that this feature uses the local branch from a local repo, so if you change the branch locally the submenu will attempt to search for that branch and if it isn't pushed yet (has no runs) it won't be displayed.
-
-## watchBranchName
-// **required** - Ex: main
-
-This will be the monitored branch if you set `statusMode` to `branch`, but your local branch has no runs yet.
+## ignoredWorkflows
+// **optional** - List of partial workflow names you don't want to watch. Case insenstive. Ex: ["test", "debug"]
 
 ## statusMode
-// **Optional** - branch, rotate or summary. Ex: summary
+// **Optional** - rotate or summary. Ex: summary
 
 Choose how the macOS menu bar should appear in the macOS bar menu:
 
@@ -74,19 +75,15 @@ Choose how the macOS menu bar should appear in the macOS bar menu:
 
 ![summary](images/summary.png)
 
-- rotate - Rotates the workflow with its name, showing one at a time.
+- rotate - Rotates the workflow with its name, showing one at a time. NOT SUPPORTED YET
 
 ![rotate](images/rotate.gif)
-
-- branch - Fixes the status to the branch you are working on your `localRepoPath`.
-
-![branch](images/branch.png)
 
 ##
 
 # How it works?
-BitActions uses [Github Actions API](https://docs.github.com/en/rest/reference/actions) to get the related workflow to the recent git push and its status. It keeps on calling the APIs every time your Xbar refreshes.
+Github Build Monitor uses [Github Actions API](https://docs.github.com/en/rest/reference/actions) to get the related workflow to the recent git push and its status. It keeps on calling the APIs every time your Xbar refreshes.
 
 # Contributing
 
-Contribution with code or documentation by raising a [pull request](https://github.com/paulononaka/bitactions/pulls) are more than welcome! Head over to the [issues tab](https://github.com/paulononaka/bitactions/issues) to report any bug or suggest an improvement. 
+Contribution with code or documentation by raising a [pull request](https://github.com/jpaulorio/bitactions/pulls) are more than welcome! Head over to the [issues tab](https://github.com/jpaulorio/bitactions/issues) to report any bug or suggest an improvement. 
