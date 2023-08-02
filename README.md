@@ -48,17 +48,19 @@ Github Build Monitor uses [Github Actions API](https://docs.github.com/en/rest/r
 
 The token does not need to have any specific scope for public repositories. However, the token  needs to have `repo - Full control of private repositories` scope for private repositories.
 
-## repoNames
-// **Required** - List of Github repo names. Ex: ["my_project", "another-project"]
-
-You can get it from the end of the GithHub URL of the project you want to watch.
-Ex: `https://github.com/acme_corporation/my_project` becomes `my_project`.
-
 ## orgName
 // **Required** - Name of your Github org. Ex: "acme_corporation"
 
 You can get it from the first path segment of the GithHub URL of the project you want to watch.
 Ex: `https://github.com/acme_corporation/my_project` becomes `acme_corporation`.
+
+## repoNames
+// **optional** - List of Github repo names. Ex: ["my_project", "another-project"]
+
+You can get it from the end of the GithHub URL of the project you want to watch.
+Ex: `https://github.com/acme_corporation/my_project` becomes `my_project`.
+
+If not provided, all repositories your token has access to will be watched.
 
 ## ignoredRepos
 // **optional** - List of partial repository names you don't want to watch. Case insenstive. Ex: ["test", "debug"]
