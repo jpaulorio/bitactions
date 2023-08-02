@@ -19,7 +19,7 @@ It only works for repositories under a Github org.
 
 Make sure you have `node` and `npm`, then run:
 ```sh
-curl https://raw.githubusercontent.com/jpaulorio/bitactions/master/install.sh | bash
+curl https://raw.githubusercontent.com/jpaulorio/github-build-monitor/master/install.sh | bash
 ```
 
 ## Configuration
@@ -88,4 +88,4 @@ Github Build Monitor uses [Github Actions API](https://docs.github.com/en/rest/r
 
 # Contributing
 
-Contribution with code or documentation by raising a [pull request](https://github.com/jpaulorio/bitactions/pulls) are more than welcome! Head over to the [issues tab](https://github.com/jpaulorio/bitactions/issues) to report any bug or suggest an improvement. 
+Contribution with code or documentation by raising a [pull request](https://github.com/jpaulorio/github-build-monitor/pulls) are more than welcome! Head over to the [issues tab](https://github.com/jpaulorio/github-build-monitor/issues) to report any bug or suggest an improvement. 
