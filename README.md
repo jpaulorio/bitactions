@@ -1,7 +1,7 @@
 # BitActions - Github Actions status for a specific Github repository on macOS menu bar
 
-Inspired by [Hukum](https://github.com/abskmj/hukum) BitActions is a BitBar plugin that displays Github Actions status for a specific Github repository in your Mac OS X Menu Bar.
-It is good for watching a regular Github workflow setup from your project, but also to allow you to filter a specific branch that you are working on in a pull request workflow.
+This is a fork from [this repo](https://github.com/paulononaka/bitactions/) that adds support to multiple repositories under a given organization.
+It also introduces new configurations for filtering both repositories and workflows by name.
 
 ## Example
 
@@ -17,7 +17,7 @@ It is good for watching a regular Github workflow setup from your project, but a
 
 Make sure you have `node` and `npm`, then run:
 ```sh
-curl https://raw.githubusercontent.com/paulononaka/bitactions/master/install.sh | bash
+curl https://raw.githubusercontent.com/jpaulorio/bitactions/master/install.sh | bash
 ```
 
 ## Configuration
